@@ -75,12 +75,16 @@ class LogWriter(object):
 		return (self.head_text, self.o_count)
 
 	@staticmethod
-	def what_is_added_the_meaning_of_life(add):
+	def what_is_added_the_meaning_of_life(add=None):
 		#6
 		#return square root of 42 PLUS add
 		# if add is not given return 42 
 		#
-		pass
+		import math
+		if add == None:
+			return 42
+		else:
+			return math.sqrt(42) + add
 
 	@staticmethod
 	def what_is_your_quest(quest="holy grail"):
