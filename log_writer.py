@@ -17,7 +17,9 @@ class LogWriter(object):
 		#1
 		# return every second element (counting from index 1) from passed list 
 		# e.g. get_every_second_element([1,2,3,4]) == [2,4]
-		pass
+		lista = data[1::2]
+		return lista
+		#pass
 
 	@staticmethod
 	def avg_every_second_element(data):
@@ -26,7 +28,14 @@ class LogWriter(object):
 		#(use function get_every_second_element )
 		#e.g:
 		# avg_every_second_element([1,2,3,4]) == 3.0
-		pass
+		elements = get_every_second_element(data)
+		sum = 0
+		for x in elements:
+			sum += x
+		average = sum / len(elements)
+		return average
+
+		#pass
 
 	@staticmethod
 	def insert_data_in_text(text, data):
@@ -106,7 +115,7 @@ class LogWriter(object):
 		# x to the second power
 		# square root of x
 		# square root of the square root of x
-		pass
+		return x**2 + math.sqrt(x) + math.sqrt(math.sqrt(x))
 
 	def get_second_part(self, computation=None):
 		#13
