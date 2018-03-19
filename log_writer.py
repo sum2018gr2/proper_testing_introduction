@@ -60,7 +60,7 @@ class LogWriter(object):
 		pass
 
 	@staticmethod
-	def what_is_added_the_meaning_of_life(add):
+	def what_is_added_the_meaning_of_life(add=None):
 		#6
 		#return square root of 42 PLUS add
 		# if add is not given return 42 
