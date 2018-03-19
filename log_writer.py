@@ -28,7 +28,7 @@ class LogWriter(object):
 		#(use function get_every_second_element )
 		#e.g:
 		# avg_every_second_element([1,2,3,4]) == 3.0
-		elements = get_every_second_element(data)
+		elements = self.get_every_second_element(data)
 		sum = 0
 		for x in elements:
 			sum += x
