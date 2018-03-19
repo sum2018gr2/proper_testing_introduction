@@ -82,7 +82,7 @@ class LogWriter(object):
 
 	def o_count_is_even(self):
 		#10
-		if self.o_count % 2:
+		if int(self.o_count) % 2:
 			return False
 		return True
 		# return True if o_count is even
