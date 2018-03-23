@@ -107,7 +107,6 @@ class LogWriter(object):
 		return True
 		# return True if o_count is even
 		# return False is o_count is odd
-		#pass
 
 	def get_movie_reference(self):
 		#11
