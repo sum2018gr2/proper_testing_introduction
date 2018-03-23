@@ -17,7 +17,9 @@ class LogWriter(object):
 		#1
 		# return every second element (counting from index 1) from passed list 
 		# e.g. get_every_second_element([1,2,3,4]) == [2,4]
-		pass
+		lista = data[1::2]
+		return lista
+		#pass
 
 	@staticmethod
 	def avg_every_second_element(data):
@@ -26,7 +28,14 @@ class LogWriter(object):
 		#(use function get_every_second_element )
 		#e.g:
 		# avg_every_second_element([1,2,3,4]) == 3.0
-		pass
+		elements = get_every_second_element(data)
+		sum = 0
+		for x in elements:
+			sum += x
+		average = sum / len(elements)
+		return average
+
+		#pass
 
 	@staticmethod
 	def insert_data_in_text(text, data):
@@ -38,7 +47,9 @@ class LogWriter(object):
 		#
 		#e.g:
 		# insert_data_in_text("AAAA list BBBB", [1,2,3]) = "AAAA list ([1, 2, 3]) BBBB"
-		pass
+		lista = text.partition('list')
+		output = lista[0] + lista[1] + " (" +str(data) + ")" + lista[2]
+		return output
 
 	@staticmethod
 	def count_o(text):
@@ -46,7 +57,7 @@ class LogWriter(object):
 		#Count occurances of character 'o' in text
 		#e.g.:
 		# count_o("oOo0O00o") == 5
-		pass
+		return text.lower().count('o')
 
 	def get_first_part(self):
 		#5
@@ -57,15 +68,23 @@ class LogWriter(object):
 		#Set member o_count with number of o's in contained 
 		# in text you created above - use count_o.
 		# Return newly created text AND value of o_count
-		pass
+		self.head_text += str("_________")
+		self.head_text += str("\n After change: \n")
+		self.head_text += str(LogWriter.insert_data_in_text(self.head_text, self.list_data))
+		self.o_count = LogWriter.count_o(self.head_text)
+		return (self.head_text, self.o_count)
 
 	@staticmethod
-	def what_is_added_the_meaning_of_life(add):
+	def what_is_added_the_meaning_of_life(add=None):
 		#6
 		#return square root of 42 PLUS add
 		# if add is not given return 42 
 		#
-		pass
+		import math
+		if add == None:
+			return 42
+		else:
+			return math.sqrt(42) + add
 
 	@staticmethod
 	def what_is_your_quest(quest="holy grail"):
@@ -78,7 +97,8 @@ class LogWriter(object):
 	def get_second_word(text):
 		#9
 		# Return the second word of text
-		pass
+		return text.split()[1]
+		#pass
 
 	def o_count_is_even(self):
 		#10
@@ -99,7 +119,13 @@ class LogWriter(object):
 		#Lastly if o_count is higher than seven append empty line and
 		#empty call of what_is_your_quest to the output.
 		#Return the output
-		pass
+                if(o_count_is_even()):
+                        output = what_is_added_the_meaning_of_life(o_count)
+                else:
+                        output = what_is_your_quest(get_second_word(head_text))
+
+                if(o_count > 7):
+                        output += "\n" + what_is_your_quest()
 
 	@staticmethod
 	def computation(x):
@@ -108,7 +134,7 @@ class LogWriter(object):
 		# x to the second power
 		# square root of x
 		# square root of the square root of x
-		pass
+		return x**2 + math.sqrt(x) + math.sqrt(math.sqrt(x))
 
 	def get_second_part(self, computation=None):
 		#13
@@ -118,7 +144,10 @@ class LogWriter(object):
 		# - the value of function computation (in argument)
 		# applied on number 47 
 		# to the output of get_movie_reference
-		pass
+		ret= "\n"
+		if computation!=None :
+ 			ret+= computation(47)
+		return self.get_movie_reference() + ret
 
 	def combining_method(self):
 		#14
@@ -127,7 +156,10 @@ class LogWriter(object):
 		# - string "0 O 0 O 0 O 0 O 0 O 0 O"
 		# - output of get_second_part applied on computation method (class member)
 		#return the concatenation
-		pass
+		out = str(self.get_first_part())
+		out += "0 O 0 O 0 O 0 O 0 O 0 O"
+		out += str(self.get_second_part(self.computation))
+		return out
 
 	def __str__(self):
 		return self.combining_method()
