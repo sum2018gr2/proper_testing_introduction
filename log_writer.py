@@ -9,7 +9,7 @@ class LogWriter(object):
 		# create member o_count with value None
 		self.list_data = list_data
 		self.head_text = head_text
-		self.o_count = None
+		self.o_count = 1
 		#pass
 
 	@staticmethod
@@ -98,9 +98,7 @@ class LogWriter(object):
 		# 10
 		# return True if o_count is even
 		# return False is o_count is odd
-		if self.o_count:
-			return self.o_count % 2 == 0
-		return False
+		return self.o_count % 2 == 0
 
 	def get_movie_reference(self):
 		#11
