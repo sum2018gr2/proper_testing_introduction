@@ -28,7 +28,7 @@ class LogWriter(object):
 		#(use function get_every_second_element )
 		#e.g:
 		# avg_every_second_element([1,2,3,4]) == 3.0
-		elements = get_every_second_element(data)
+		elements = LogWriter.get_every_second_element(data)
 		sum = 0
 		for x in elements:
 			sum += x
@@ -68,11 +68,10 @@ class LogWriter(object):
 		#Set member o_count with number of o's in contained 
 		# in text you created above - use count_o.
 		# Return newly created text AND value of o_count
-		self.head_text += str("_________")
-		self.head_text += str("\n After change: \n")
-		self.head_text += str(LogWriter.insert_data_in_text(self.head_text, self.list_data))
-		self.o_count = LogWriter.count_o(self.head_text)
-		return (self.head_text, self.o_count)
+		text = "{}{}{}{}".format(self.head_text, "_________", "\n After change: \n",
+								 LogWriter.insert_data_in_text(self.head_text, self.list_data))
+		self.o_count = LogWriter.count_o(text)
+		return text, self.o_count
 
 	@staticmethod
 	def what_is_added_the_meaning_of_life(add=None):
@@ -80,52 +79,43 @@ class LogWriter(object):
 		#return square root of 42 PLUS add
 		# if add is not given return 42 
 		#
-		import math
-		if add == None:
-			return 42
-		else:
-			return math.sqrt(42) + add
+		return math.sqrt(42 + add) if add else math.sqrt(42)
 
 	@staticmethod
 	def what_is_your_quest(quest="holy grail"):
 		#8
 		# if the argument is not specified return "To seek the holy grail"
 		# in other case append the texts "To seek the " with argument and return
-		pass
+		return "To seek the {}".format(quest) if quest else "To seek the holy grail"
 
 	@staticmethod
 	def get_second_word(text):
 		#9
 		# Return the second word of text
 		return text.split()[1]
-		#pass
 
 	def o_count_is_even(self):
-		#10
-		if self.o_count % 2:
-			return False
-		return True
+		# 10
 		# return True if o_count is even
 		# return False is o_count is odd
+		if self.o_count:
+			return self.o_count % 2 == 0
+		return False
 
 	def get_movie_reference(self):
 		#11
 		#this is the tough one
 		#use o_count is even (use o_count_is_even())
-		#If o_count is even set output of this function 
+		#If o_count is even set output of this function
 		#to value of what_is_added_the_meaning_of_life applied on o_count
 		#If o_count is odd setoutput to be the value of what_is_your_quest applied on
 		#the second word of head_text (member of this object).
 		#Lastly if o_count is higher than seven append empty line and
 		#empty call of what_is_your_quest to the output.
 		#Return the output
-                if(o_count_is_even()):
-                        output = what_is_added_the_meaning_of_life(o_count)
-                else:
-                        output = what_is_your_quest(get_second_word(head_text))
-
-                if(o_count > 7):
-                        output += "\n" + what_is_your_quest()
+		output = LogWriter.what_is_added_the_meaning_of_life(self.o_count) if self.o_count_is_even() \
+			else LogWriter.what_is_your_quest(self.get_second_word(self.head_text))
+		return "{}\n{}".format(output, LogWriter.what_is_your_quest()) if self.o_count > 7 else str(output)
 
 	@staticmethod
 	def computation(x):
@@ -144,10 +134,8 @@ class LogWriter(object):
 		# - the value of function computation (in argument)
 		# applied on number 47 
 		# to the output of get_movie_reference
-		ret= "\n"
-		if computation!=None :
- 			ret+= computation(47)
-		return self.get_movie_reference() + ret
+		return "{}\n{}".format(self.get_movie_reference(), computation(47)) \
+			if computation else self.get_movie_reference()
 
 	def combining_method(self):
 		#14
@@ -156,18 +144,19 @@ class LogWriter(object):
 		# - string "0 O 0 O 0 O 0 O 0 O 0 O"
 		# - output of get_second_part applied on computation method (class member)
 		#return the concatenation
-		out = str(self.get_first_part())
-		out += "0 O 0 O 0 O 0 O 0 O 0 O"
-		out += str(self.get_second_part(self.computation))
-		return out
+		return '{}{}{}'.format(self.get_first_part()[0], "0 O 0 O 0 O 0 O 0 O 0 O",
+								 self.get_second_part(LogWriter.computation))
 
 	def __str__(self):
 		return self.combining_method()
 
 if __name__=="__main__":
-	head_text ="""
-	Stil liist shilts list 1ist tilst iist l1ist? 'WHAT DID THE 0NE SNO0WMAN SAY TO THE OTHER SNOWMAN? 00O0O'
-	"""
+	# head_text ="""
+	# Stil liist shilts list 1ist tilst iist l1ist? 'WHAT DID THE 0NE SNO0WMAN SAY TO THE OTHER SNOWMAN? 00O0O'
+	# """
+	head_text = """
+			The following list represents the total number of invisible unicorns in classroom.
+			"""
 	list_data = [1,2,34,4]
 	test_instance = LogWriter(list_data, head_text)
 	print(test_instance)
